@@ -26,20 +26,25 @@ func LoadCitiesFromFile() ([]City, error) {
 	for scanner.Scan() {
 		line := scanner.Text()
 
-		// Split the line into city name and population
-		parts := strings.Split(line, "@")
-		if len(parts) != 2 {
-			continue // Skip inva
-			// lid lines
-		}
+		city := extractCityFromLine(line)
 
-		population, err := strconv.Atoi(parts[1])
-		if err != nil {
-			continue // Skip if conversion fails
-		}
-
-		cities = append(cities, City{Name: parts[0], Population: population})
+		cities = append(cities, city)
 	}
 
 	return cities, nil
+}
+
+func extractCityFromLine(line string) City {
+	parts := strings.Split(line, "@")
+	if len(parts) != 2 {
+		panic("cities file is in the wrong format")
+	}
+
+	population, err := strconv.Atoi(parts[1])
+	if err != nil {
+		panic("format error. It was not possible to convert population to integer")
+	}
+
+	city := City{Name: parts[0], Population: population}
+	return city
 }
