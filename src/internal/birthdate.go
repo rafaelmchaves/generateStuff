@@ -12,10 +12,8 @@ func GenerateBirthdate() string {
 	rand.Seed(time.Now().UnixNano())
 	randomAge := rand.Intn(maxAge)
 
-	// Get the current time
 	now := time.Now()
 
-	// Calculate the birth year
 	birthYear := now.Year() - randomAge
 
 	month := time.Month(rand.Intn(12) + 1)
@@ -75,10 +73,7 @@ func GenerateBirthdateUsingOddsSlot(ageSlots []*AgeSlot) string {
 func generateBirthdateByAge(age int) string {
 	rand.Seed(time.Now().UnixNano())
 
-	// Get the current time
 	now := time.Now()
-
-	// Calculate the birth year
 	birthYear := now.Year() - age
 
 	month := time.Month(rand.Intn(12) + 1)
