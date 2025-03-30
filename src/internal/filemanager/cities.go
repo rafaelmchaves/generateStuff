@@ -45,6 +45,5 @@ func extractCityFromLine(line string) City {
 		panic("format error. It was not possible to convert population to integer")
 	}
 
-	city := City{Name: parts[0], Population: population}
-	return city
+	return City{Name: parts[0], Population: population}
 }
