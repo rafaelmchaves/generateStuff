@@ -42,7 +42,7 @@ func extractCityFromLine(line string) City {
 
 	population, err := strconv.Atoi(parts[1])
 	if err != nil {
-		panic("format error. It was not possible to convert population to integer")
+		panic("format error. It was not possible to convert population to integer. Line:" + line + err.Error())
 	}
 
 	return City{Name: parts[0], Population: population}

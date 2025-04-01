@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/rafaelmchaves/generatestuff/src/internal"
 	"github.com/rafaelmchaves/generatestuff/src/internal/filemanager"
+	"github.com/rafaelmchaves/generatestuff/src/internal/generation"
 )
 
 func main() {
@@ -20,10 +20,10 @@ func main() {
 		fmt.Println("City:", city.Name, "Population:", city.Population)
 	}
 
-	birthdate := internal.GenerateBirthdate()
+	birthdate := generation.GenerateBirthdate()
 	println("birthdate", birthdate)
 
-	ageSlots := []*internal.AgeSlot{
+	ageSlots := []*generation.AgeSlot{
 		{MinAge: 0, MaxAge: 4, LeftQuantity: 500},
 		{MinAge: 5, MaxAge: 9, LeftQuantity: 400},
 		{MinAge: 10, MaxAge: 14, LeftQuantity: 600},
@@ -50,7 +50,7 @@ func main() {
 	people := 1
 	start := time.Now()
 	for people <= 5000 {
-		birthdate := internal.GenerateBirthdateUsingOddsSlot(ageSlots)
+		birthdate := generation.GenerateBirthdateUsingOddsSlot(ageSlots)
 		if birthdate == "" {
 			break
 		}
@@ -61,6 +61,11 @@ func main() {
 	fmt.Println("generation time executed in ", elapsed)
 	for _, slot := range ageSlots {
 		fmt.Printf("MinAge: %d, MaxAge: %d, LeftQuantity: %d\n", slot.MinAge, slot.MaxAge, slot.LeftQuantity)
+	}
+
+	nameList := filemanager.LoadNames()
+	for _, name := range nameList {
+		println(fmt.Sprintf("Name:%s Probability: %d", name.Description, name.Probability))
 	}
 
 }
