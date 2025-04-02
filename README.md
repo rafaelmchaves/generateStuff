@@ -23,5 +23,5 @@ internal function that generates a surname. Surnames with more probabilities wil
 ### GenerateFullName
 internal function that generates a full name. This function generates a first name and 2 surnames. Ex: Anthony Lewis Wisbech
 
-### GenerateFullNameWirhProbabilities
+### GenerateFullNameWithProbabilities
 internal function that generates a full name. This function generates a first name and 2 surnames using the functions GenerateFirstNameWithProbabilities and GenerateSurnameNameWithProbabilities
