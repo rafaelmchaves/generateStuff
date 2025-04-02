@@ -31,6 +31,16 @@ func GenerateSurnameNameWithProbabilities() string {
 	return generateWithProbability(nameList)
 }
 
+func GenerateSurname() string {
+
+	nameList := filemanager.LoadEnglishSurnames()
+
+	rand.Seed(time.Now().UnixNano())
+	randomNumber := rand.Intn(len(nameList))
+
+	return nameList[randomNumber].Description
+}
+
 func generateWithProbability(nameList []filemanager.Name) string {
 	rand.Seed(time.Now().UnixNano())
 	//generate a percentage(salt) in order to modify the probabilities
@@ -51,18 +61,12 @@ func generateWithProbability(nameList []filemanager.Name) string {
 	return newNameList[randomNamePosition].Description
 }
 
-func GenerateSurname() string {
-
-	nameList := filemanager.LoadEnglishSurnames()
-
-	rand.Seed(time.Now().UnixNano())
-	randomNumber := rand.Intn(len(nameList))
-
-	return nameList[randomNumber].Description
-}
-
 func GenerateFullName() string {
 	return GenerateFirstName() + " " + GenerateSurname() + " " + GenerateSurname()
+}
+
+func GenerateFullNameWithProbabilities() string {
+	return GenerateFirstNameWithProbabilities() + " " + GenerateSurnameNameWithProbabilities() + " " + GenerateSurnameNameWithProbabilities()
 }
 
 func addProbabilities(nameList []filemanager.Name) int {
