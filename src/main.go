@@ -85,6 +85,8 @@ func main() {
 	println(generation.GenerateSurname())
 	println(generation.GenerateSurnameNameWithProbabilities())
 
+	println(generation.GenerateFullName())
+
 	// nameList := filemanager.LoadNames()
 	// for _, name := range nameList {
 	// 	println(fmt.Sprintf("Name:%s Probability: %d", name.Description, name.Probability))

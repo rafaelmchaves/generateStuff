@@ -61,6 +61,10 @@ func GenerateSurname() string {
 	return nameList[randomNumber].Description
 }
 
+func GenerateFullName() string {
+	return GenerateFirstName() + " " + GenerateSurname() + " " + GenerateSurname()
+}
+
 func addProbabilities(nameList []filemanager.Name) int {
 	salt := rand.Intn(100)
 	if salt > 80 {
