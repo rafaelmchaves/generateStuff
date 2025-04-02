@@ -22,6 +22,16 @@ func GenerateFirstName() string {
 func GenerateFirstNameWithProbabilities() string {
 	nameList := filemanager.LoadNames()
 
+	return generateWithProbability(nameList)
+}
+
+func GenerateSurnameNameWithProbabilities() string {
+	nameList := filemanager.LoadEnglishSurnames()
+
+	return generateWithProbability(nameList)
+}
+
+func generateWithProbability(nameList []filemanager.Name) string {
 	rand.Seed(time.Now().UnixNano())
 	//generate a percentage(salt) in order to modify the probabilities
 	quantityNamesToBeUsed := addProbabilities(nameList)
@@ -41,6 +51,16 @@ func GenerateFirstNameWithProbabilities() string {
 	return newNameList[randomNamePosition].Description
 }
 
+func GenerateSurname() string {
+
+	nameList := filemanager.LoadEnglishSurnames()
+
+	rand.Seed(time.Now().UnixNano())
+	randomNumber := rand.Intn(len(nameList))
+
+	return nameList[randomNumber].Description
+}
+
 func addProbabilities(nameList []filemanager.Name) int {
 	salt := rand.Intn(100)
 	if salt > 80 {
@@ -51,13 +71,13 @@ func addProbabilities(nameList []filemanager.Name) int {
 	return int(float64(len(nameList)) * percentage)
 }
 
-// the rand algorithm gives the middles position more probability to be generated.
+// The rand algorithm gives the middles position more probability to be generated.
 // So, it was included the first position names to the middle in order to improve their probabilities
 func insertBiggestOddsInTheMiddle(nameList []filemanager.Name) []filemanager.Name {
 	size := len(nameList)
-	if size > 10 {
+	if size > 15 {
 		var i int
-		for i <= 4 {
+		for i <= 7 {
 			aux := nameList[i]
 			middle := size / 2
 			nameList[i] = nameList[middle+i]

@@ -30,6 +30,24 @@ func LoadNames() []Name {
 	return nameList
 }
 
+func LoadEnglishSurnames() []Name {
+	file, err := os.Open("/Users/rafael/programming projects/generateStuff/data/english_surnames.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	var nameList []Name
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		name := extractNameFromLine(line)
+
+		nameList = append(nameList, name)
+	}
+
+	return nameList
+}
+
 func extractNameFromLine(line string) Name {
 	parts := strings.Split(line, "@")
 	if len(parts) != 2 {
